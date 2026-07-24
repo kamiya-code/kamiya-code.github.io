@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="自由回答をゲームマスターが受け止め、問い返しながら突破作戦を育てる社内体験デモです。"
+    />
+    <meta name="theme-color" content="#062d31" />
+    <title>ひらめきピンチ・ミッション</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="mission-shell">
+      <div class="scene-scrim" aria-hidden="true"></div>
+
+      <header class="mission-header">
+        <div class="brand-mark" aria-hidden="true"><span>✦</span></div>
+        <div class="brand-copy">
+          <p class="eyebrow">社内体験デモ</p>
+          <h1>ひらめきピンチ・ミッション</h1>
+          <p>ゲームマスターAIと、突破作戦を考えよう</p>
+        </div>
+        <div class="mission-badge" aria-label="ミッション1">
+          <span>MISSION</span><strong>01</strong>
+        </div>
+      </header>
+
+      <nav class="progress-route" aria-label="ミッションの進行">
+        <div class="route-step is-active" data-step="1" aria-current="step">
+          <span>1</span><small>調べる</small>
+        </div>
+        <div class="route-step" data-step="2"><span>2</span><small>考える</small></div>
+        <div class="route-step" data-step="3"><span>3</span><small>伝える</small></div>
+        <div class="route-step" data-step="4"><span>4</span><small>実例</small></div>
+      </nav>
+
+      <div class="mission-grid">
+        <section class="briefing-panel" aria-labelledby="mission-title">
+          <div class="paper-tab"><span aria-hidden="true">⌖</span> ミッションブリーフィング</div>
+
+          <div class="mission-copy">
+            <p class="location-line">
+              <span aria-hidden="true">●</span> 日本・山あいの路線／安全対策会議
+            </p>
+            <h2 id="mission-title">シカとの衝突を減らせ！</h2>
+            <div class="brush-line" aria-hidden="true"></div>
+            <p>
+              あなたは鉄道会社の安全対策チームです。山あいのある路線では、冬の夜を中心に
+              シカとの衝突が同じ区間で繰り返し起きています。柵や、シカが嫌がる薬だけでは
+              十分に減らせません。
+              <strong>
+                運転士が目の前のシカにその場で対処するのではなく、危険区間で何度でも使える仕組み
+              </strong>
+              を考えてください。
+            </p>
+          </div>
+
+          <div class="condition-list" aria-label="作戦の条件">
+            <span>シカを傷つけない</span>
+            <span>走行中に使える</span>
+            <span>人の目視に頼らない</span>
+          </div>
+
+          <div class="investigation">
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">対策資料を調べる</span>
+                <h3>資料カードをタップ</h3>
+              </div>
+              <span class="opened-count" id="opened-count">0/3</span>
+            </div>
+
+            <div class="observation-list">
+              <button
+                class="observation-card"
+                type="button"
+                aria-expanded="false"
+                data-teaser="いつ・どこで多い？"
+                data-detail="衝突は冬の夜に多く、同じ区間で繰り返し起きている。シカを見つけてから急ブレーキをかけるだけでは間に合わない。"
+              >
+                <span class="observation-icon" aria-hidden="true">▦</span>
+                <span class="observation-copy">
+                  <strong>事故記録</strong><small>いつ・どこで多い？</small>
+                </span>
+                <span class="observation-toggle" aria-hidden="true">+</span>
+              </button>
+
+              <button
+                class="observation-card"
+                type="button"
+                aria-expanded="false"
+                data-teaser="柵や薬だけで十分？"
+                data-detail="鹿止柵や、シカが嫌がるにおいの薬には一定の効果がある。しかし長い路線をすべて守るのは難しく、事故は十分に減っていない。"
+              >
+                <span class="observation-icon" aria-hidden="true">□</span>
+                <span class="observation-copy">
+                  <strong>これまでの対策</strong><small>柵や薬だけで十分？</small>
+                </span>
+                <span class="observation-toggle" aria-hidden="true">+</span>
+              </button>
+
+              <button
+                class="observation-card"
+                type="button"
+                aria-expanded="false"
+                data-teaser="「気づく」と「逃げる」は同じ？"
+                data-detail="音によって、シカがそちらを見るだけの反応と、その場から離れる反応があった。「気づかせる」と「逃げてもらう」は別の働きらしい。"
+              >
+                <span class="observation-icon" aria-hidden="true">↔</span>
+                <span class="observation-copy">
+                  <strong>行動実験</strong><small>「気づく」と「逃げる」は同じ？</small>
+                </span>
+                <span class="observation-toggle" aria-hidden="true">+</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="play-panel" aria-labelledby="strategy-title">
+          <form class="answer-form" id="answer-form">
+            <div class="section-heading answer-heading">
+              <div>
+                <span class="section-kicker">あなたの作戦</span>
+                <h2 id="strategy-title">どんな安全対策をつくる？</h2>
+              </div>
+              <span class="attempt-count" id="attempt-count">まだ何度でも挑戦OK</span>
+            </div>
+
+            <label class="sr-only" for="strategy-answer">自由回答を入力</label>
+            <div class="textarea-wrap">
+              <textarea
+                id="strategy-answer"
+                maxlength="300"
+                placeholder="自由に考えて、作戦を書いてみよう"
+              ></textarea>
+              <span class="character-count" id="character-count">0/300</span>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-action" id="submit-button" type="submit" disabled>
+                <span class="action-icon" aria-hidden="true">◎</span>
+                <span class="button-label">作戦を伝える</span>
+              </button>
+              <button class="secondary-action" id="hint-button" type="button">
+                <span aria-hidden="true">✦</span>
+                <span class="hint-label">ヒントを見る</span>
+              </button>
+            </div>
+          </form>
+
+          <section class="gm-console" aria-labelledby="gm-title" id="gm-console">
+            <div class="gm-identity">
+              <div class="gm-orb" id="gm-orb">
+                <span aria-hidden="true">⌁</span><b>GM</b>
+              </div>
+              <div>
+                <span class="gm-status" id="gm-status">交信中</span>
+                <h2 id="gm-title">ゲームマスターAI</h2>
+              </div>
+            </div>
+
+            <div class="conversation" id="conversation" aria-live="polite">
+              <article class="gm-message state-clarify">
+                <span class="judgement-label">ミッション開始</span>
+                <h3>一回の運転操作ではなく、仕組みを考えよう！</h3>
+                <p>
+                  同じ危険区間で何度でも使える安全対策が今回のミッション。短い答えでも大丈夫。
+                  そこから一緒に作戦を育てるよ。
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <div class="give-up-row" id="give-up-row">
+            <button type="button" id="give-up-button">降参して、実際の方法を見る</button>
+          </div>
+
+          <section class="reveal-card" id="reveal-card" aria-labelledby="reveal-title" hidden>
+            <div class="reveal-topline">
+              <span id="reveal-mode">ACTUAL CASE</span><span id="reveal-subtitle">答え合わせ</span>
+            </div>
+            <h2 id="reveal-title">実際に行われた解決例</h2>
+            <div class="solution-formula" aria-label="解決方法">
+              <span>事故多発区間で自動再生</span><b>→</b><span>シカの警戒声</span><b>→</b
+              ><span>犬の咆哮</span>
+            </div>
+            <p>
+              鉄道総研は、過去の衝突データから事故の多い区間を選び、走行する車両の先頭から
+              二つの音を自動で流す装置を開発しました。まずシカの警戒声で音へ注意を向けさせ、
+              続いて犬の咆哮で線路から離れてもらいます。初期試験では目撃回数が45％減り、
+              2年9カ月の長期試験でも接触事故が約3〜4割減りました。
+            </p>
+            <p class="not-only-answer">
+              これは唯一の正解ではなく、国内で研究・検証された一例です。シカを傷つけず、
+              人の目視に頼らず、危険区間で繰り返し使える別の作戦も、条件を満たせば立派な
+              突破アイデアです。
+            </p>
+            <div class="source-links">
+              <a href="https://www.rtri.or.jp/rd/seika/2016/1-08.html" target="_blank" rel="noreferrer"
+                >鉄道総研：音によるシカ対策の開発 ↗</a
+              >
+              <a href="https://www.rtri.or.jp/rd/seika/2024/1-08.html" target="_blank" rel="noreferrer"
+                >鉄道総研：長期的な効果の検証 ↗</a
+              >
+            </div>
+            <button class="restart-button" id="restart-button" type="button">
+              <span aria-hidden="true">↻</span> もう一度ためす
+            </button>
+          </section>
+
+          <details class="demo-tools" id="demo-tools">
+            <summary>社内デモ用：いろいろな反応を試す</summary>
+            <p>ボタンを押すと回答欄に例文が入ります。判定の幅を比べてください。</p>
+            <div class="demo-answer-grid">
+              <button type="button" data-answer="線路を全部、高い柵で囲む">
+                <span>方向違い</span>線路を全部、高い柵で囲む
+              </button>
+              <button type="button" data-answer="警笛をもっと大きく鳴らす">
+                <span>考え直し</span>警笛をもっと大きく鳴らす
+              </button>
+              <button type="button" data-answer="犬のほえる声を流す">
+                <span>おしい①</span>犬のほえる声を流す
+              </button>
+              <button type="button" data-answer="シカの警戒声を流す">
+                <span>おしい②</span>シカの警戒声を流す
+              </button>
+              <button
+                type="button"
+                data-answer="シカの警戒声を先に流し、続けて犬のほえる声を流す"
+              >
+                <span>核は正解</span>シカの警戒声を先に流し、続けて犬のほえる声を流す
+              </button>
+              <button
+                type="button"
+                data-answer="危険区間に赤外線センサーを置き、シカを見つけたら線路の外へ誘導する光を点滅させる"
+              >
+                <span>別解</span>赤外線センサーと光で線路の外へ誘導する
+              </button>
+              <button type="button" data-answer="犬を線路に放してシカを追いかけさせる">
+                <span>危険</span>犬を線路に放して追いかけさせる
+              </button>
+              <button
+                type="button"
+                data-answer="列車が事故多発区間に入ったら、先頭の装置からシカの警戒声、その後に犬のほえる声を自動で流す"
+              >
+                <span>正解</span>列車から警戒声→犬の声を自動で流す
+              </button>
+            </div>
+          </details>
+        </section>
+      </div>
+
+      <footer class="mission-footer">
+        <p>
+          社内検証版：自由回答を受け止め、足りない点を一つずつ問い返す体験を検証します。
+          この公開デモは端末内の判定ロジックで動き、入力内容を送信しません。
+        </p>
+        <p>安全のため、実際の線路へ近づいたり、動物を追いかけたりしないでください。</p>
+      </footer>
+    </main>
+  </body>
+</html>
